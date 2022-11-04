@@ -7,6 +7,7 @@ const port = 3000;
 let requestCounter = 0;
 
 app.use(express.static("public"));
+app.set("view engine", "pug");
 
 // app.get("/", (req, res) => {
 //   res.send("Hello World!");
@@ -15,7 +16,13 @@ app.use(express.static("public"));
 app.get("/test", (req, res) => {
   console.log("Testing page access");
   requestCounter++;
-  res.send("<h1>Test page</h1><h2>" + requestCounter + "</h2>");
+  res.render("index", {
+    title: "Pug test page",
+    header: "Test page",
+    text: "Page was requested " + requestCounter + " times.",
+  });
+
+  //   res.send("<h1>Test page</h1><h2>" + requestCounter + "</h2>");
 });
 
 app.get("/catinfo", (req, res) => {
