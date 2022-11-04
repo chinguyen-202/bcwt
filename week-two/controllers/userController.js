@@ -22,7 +22,13 @@ const getUser = (req, res) => {
   }
 };
 
+const createUser = (req, res) => {
+  console.log(req.body);
+  res.json(req.body);
+};
+
 module.exports = {
   getUserList,
   getUser,
+  createUser,
 };

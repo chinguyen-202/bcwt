@@ -11,9 +11,7 @@ router.get("/:userId", userController.getUser);
 //   res.send("You reqested a cat whose id is " + req.params.catId);
 // });
 
-router.post("/", (req, res) => {
-  res.send("With this endpoint you can add users.");
-});
+router.post("/", userController.createUser);
 
 router.put("/", (req, res) => {
   res.send("With this endpoint you can edit users.");
