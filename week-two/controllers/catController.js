@@ -17,7 +17,13 @@ const getCat = (req, res) => {
   }
 };
 
+const createCat = (req, res) => {
+  console.log(req.body);
+  res.send("adding a cat");
+};
+
 module.exports = {
   getCatsList,
   getCat,
+  createCat,
 };
