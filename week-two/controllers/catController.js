@@ -24,13 +24,17 @@ const getCatById = async (req, res) => {
   // }
 };
 
-const createCat = (req, res) => {
-  console.log(req.body);
-  res.send("adding a cat");
+const addCat = async (req, res) => {
+  const newCat = req.body;
+  newCat.filename = req.file.filename;
+  console.log("New cat created: ", newCat);
+  const result = await catModel.addCat(newCat, res);
+  res.status(201).json({ catId: result });
 };
+
 
 module.exports = {
   getCatsList,
   getCatById,
-  createCat,
+  addCat,
 };

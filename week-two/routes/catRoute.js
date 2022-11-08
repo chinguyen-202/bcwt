@@ -15,7 +15,7 @@ router.get("/:catId", catController.getCatById);
 //   res.send("You reqested a cat whose id is " + req.params.catId);
 // });
 
-router.post("/", upload.single("cat"), catController.createCat);
+router.post("/", upload.single("cat"), catController.addCat);
 
 router.put("/", (req, res) => {
   res.send("With this endpoint you can edit cats.");
