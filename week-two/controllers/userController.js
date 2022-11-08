@@ -4,31 +4,29 @@ const userModel = require("../models/userModel");
 
 const users = userModel.users;
 
-const getUserList = (req, res) => {
-  users.map((user) => {
-    delete user.password;
-    return user;
-  });
+const getAllUsers = async (req, res) => {
+  const users = await userModel.getAllUsers();
   res.json(users);
 };
 
-const getUser = (req, res) => {
-  const user = users.filter((user) => req.params.userId == user.id)[0];
+const getUserById = async (req, res) => {
+  const user = await userModel.getUserById(res, req.params.userId);
   if (user) {
-    delete user.password;
     res.json(user);
   } else {
     res.sendStatus(404);
   }
 };
 
-const createUser = (req, res) => {
-  console.log(req.body);
-  res.json(req.body);
+const addUser = async (req, res) => {
+  console.log("New user created: ", req.body);
+  const newUser = req.body;
+  const result = await userModel.addUser(newUser, res);
+  res.status(201).json({ userId: result });
 };
 
 module.exports = {
-  getUserList,
-  getUser,
-  createUser,
+  getAllUsers,
+  getUserById,
+  addUser,
 };
