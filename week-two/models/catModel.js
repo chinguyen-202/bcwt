@@ -9,20 +9,24 @@ const getAllCats = async () => {
     return rows;
   } catch (e) {
     console.error("error", e.message);
+    res.status[500].send(e.message);
   }
 };
 
-const getCat = async () => {
+const getCatById = async (res, catId) => {
   try {
     const row = await promisePool.query(
-      "SELECT * FROM wop_cat WHERE cat_id = 
+      "SELECT * FROM wop_cat WHERE cat_id = ?",
+      [catId]
     );
-    return row;
+    return row[0];
   } catch (e) {
     console.log("error", e.message);
+    res.status[500].send(e.message);
   }
 };
 
 module.exports = {
   getAllCats,
+  getCatById,
 };

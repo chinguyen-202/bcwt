@@ -10,7 +10,7 @@ const upload = multer({ dest: "uploads/" });
 
 router.get("/", catController.getCatsList);
 
-router.get("/:catId", catController.getCat);
+router.get("/:catId", catController.getCatById);
 // router.get("/:catId", (req, res) => {
 //   res.send("You reqested a cat whose id is " + req.params.catId);
 // });

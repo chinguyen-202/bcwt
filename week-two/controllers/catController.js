@@ -9,9 +9,13 @@ const getCatsList = async (req, res) => {
   res.json(cats);
 };
 
-const getCat = async (req, res) => {
-  const cat = await catModel.getCat();
-  return cat;
+const getCatById = async (req, res) => {
+  const cat = await catModel.getCatById(res, req.params.catId);
+  if (cat) {
+    res.json(cat);
+  } else {
+    res.sendStatus(404);
+  }
   // const cat = cats.filter((cat) => req.params.catId == cat.id)[0];
   // if (cat) {
   //   res.json(cat);
@@ -27,6 +31,6 @@ const createCat = (req, res) => {
 
 module.exports = {
   getCatsList,
-  getCat,
+  getCatById,
   createCat,
 };
