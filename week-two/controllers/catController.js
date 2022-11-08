@@ -4,17 +4,20 @@ const catModel = require("../models/catModel");
 
 const cats = catModel.cats;
 
-const getCatsList = (req, res) => {
+const getCatsList = async (req, res) => {
+  const cats = await catModel.getAllCats();
   res.json(cats);
 };
 
-const getCat = (req, res) => {
-  const cat = cats.filter((cat) => req.params.catId == cat.id)[0];
-  if (cat) {
-    res.json(cat);
-  } else {
-    res.sendStatus(404);
-  }
+const getCat = async (req, res) => {
+  const cat = await catModel.getCat();
+  return cat;
+  // const cat = cats.filter((cat) => req.params.catId == cat.id)[0];
+  // if (cat) {
+  //   res.json(cat);
+  // } else {
+  //   res.sendStatus(404);
+  // }
 };
 
 const createCat = (req, res) => {
