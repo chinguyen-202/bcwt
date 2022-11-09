@@ -24,7 +24,7 @@ const getCatById = async (req, res) => {
   // }
 };
 
-const addCat = async (req, res) => {
+const createCat = async (req, res) => {
   const newCat = req.body;
   newCat.filename = req.file.filename;
   console.log("New cat created: ", newCat);
@@ -32,9 +32,34 @@ const addCat = async (req, res) => {
   res.status(201).json({ catId: result });
 };
 
+const deleteCat = async (req, res) => {
+  const result = await catModel.deleteCatById(req.params.catId, res);
+
+  if (result.affectedRows > 0) {
+    console.log("delete cat: ", result);
+    res.status(200).json({ message: "cat deleted" });
+  } else {
+    res.status(404).json({ message: "Cat not exist in database" });
+  }
+};
+
+const modifyCat = async (req, res) => {
+  const editCat = req.body;
+  const catId = req.params.catId;
+  console.log("Edit cat info: ", editCat);
+  const result = await catModel.editCatById(catId, editCat, res);
+  if (result.affectedRows > 0) {
+    console.log("cat with ID info change: ", catId);
+    res.status(200).json({ message: "cat edited" });
+  } else {
+    res.status(404).json({ message: "Cat not exist in database" });
+  }
+};
 
 module.exports = {
   getCatsList,
   getCatById,
-  addCat,
+  createCat,
+  deleteCat,
+  modifyCat,
 };
