@@ -3,26 +3,15 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-
 const catController = require("../controllers/catController");
-
 const upload = multer({ dest: "uploads/" });
 
-router.get("/", catController.getCatsList);
-
-router.get("/:catId", catController.getCatById);
-// router.get("/:catId", (req, res) => {
-//   res.send("You reqested a cat whose id is " + req.params.catId);
-// });
-
-router.post("/", upload.single("cat"), catController.addCat);
-
-router.put("/", (req, res) => {
-  res.send("With this endpoint you can edit cats.");
-});
-
-router.delete("/", (req, res) => {
-  res.send("With this endpoint you can delete cats.");
-});
+router
+  .get("/", catController.getCatsList)
+  .get("/:catId", catController.getCatById)
+  .post("/", upload.single("cat"), catController.createCat)
+  .put("/", catController.modifyCat)
+  .put("/:catId", catController.modifyCat)
+  .delete("/:catId", catController.deleteCat);
 
 module.exports = router;
