@@ -8,10 +8,12 @@
     <script defer src="script.js"></script>
   </head>
   <body>
-    <h1>TASK 2 - AJAX</h1>
-    <figure>
-      <img />
-      <figcaption></figcaption>
-    </figure>
+    <h1>Search for movies</h1>
+    <form id="search-form" action="https://api.tvmaze.com/search/shows">
+      <input type="text" name="search-field" id="query" />
+      <button type="submit" id="submit">Go</button>
+    </form>
+
+    <div id="result"></div>
   </body>
 </html>
