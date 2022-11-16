@@ -27,14 +27,14 @@ router
   .post(
     "/",
     upload.single("cat"),
-    body("name").isAlphanumeric(),
+    body("name").isAlphanumeric().trim().escape(),
     body("birthdate").isDate(),
     body("weight").isFloat({ min: 0.1, max: 30 }),
     body("owner").isInt({ min: 1 }),
     catController.createCat
   )
-  .put("/", catController.modifyCat)
-  .put("/:catId", catController.modifyCat)
-  .delete("/:catId", catController.deleteCat);
+  .put("/", catController.modifyCat) //TODO: add validators
+  .put("/:catId", catController.modifyCat) //TODO: add validators
+  .delete("/:catId", catController.deleteCat); //TODO: add validators
 
 module.exports = router;

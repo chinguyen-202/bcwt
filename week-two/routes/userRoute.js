@@ -10,16 +10,12 @@ router
   .get("/:userId", userController.getUserById)
   .post(
     "/",
-    body("name").isLength({ min: 3 }),
-    body("email").isEmail(),
-    body("passwd").isLength({ min: 8 }),
+    body("name").isLength({ min: 3 }).trim().escape(),
+    body("email").isEmail().normalizeEmail(),
+    body("passwd").isLength({ min: 8 }).trim(),
     userController.addUser
-  );
-router.put("/", (req, res) => {
-  res.send("With this endpoint you can edit users.");
-});
-router.delete("/", (req, res) => {
-  res.send("With this endpoint you can delete users.");
-});
+  )
+  .put("/", userController.modifyUser)
+  .delete("/", userController.deleteUser);
 
 module.exports = router;

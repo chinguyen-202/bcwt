@@ -1,7 +1,7 @@
 "use strict";
 // userController
 const userModel = require("../models/userModel");
-const {validationResult} = require('express-validator')
+const { validationResult } = require("express-validator");
 
 const users = userModel.users;
 
@@ -26,31 +26,46 @@ const addUser = async (req, res) => {
     newUser.role = 1;
   }
   const errors = validationResult(req);
-  console.log('validation error', console.errors;)
-  if(errors.isEmpty()){
+  console.log("validation error", errors);
+  if (errors.isEmpty()) {
     const result = await userModel.addUser(newUser, res);
-    res.status(201).json({message:'user created', userId: result});
-  }else{
+    res.status(201).json({ message: "user created", userId: result });
+  } else {
     res.status(400).json({
-      message: 'user creation failed',
-      errors: errors.array()
+      message: "user creation failed",
+      errors: errors.array(),
     });
   }
-  };
+};
 
-  const modifyUser = (req, res) => {
-    
-    // TODO: add functionality & data model
-  };
-  const deleteUser = (req, res) => {
-    // TODO: add functionality & data model
-  };
- 
+const modifyUser = async (req, res) => {
+  const editUser = req.body;
+  const userId = req.params.catId;
+  console.log("Edit cat info: ", editCat);
+  const result = await userModel.editUserById(userId, editUser, res);
+  if (result.affectedRows > 0) {
+    console.log("user with ID info change: ", userId);
+    res.status(200).json({ message: "user edited" });
+  } else {
+    res.status(404).json({ message: "User not exist in database" });
+  }
+};
+
+const deleteUser = async (req, res) => {
+  const result = await userModel.deleteUserById(req.params.userId, res);
+
+  if (result.affectedRows > 0) {
+    console.log("delete user: ", result);
+    res.status(200).json({ message: "user deleted" });
+  } else {
+    res.status(404).json({ message: "User not exist in database" });
+  }
+};
 
 module.exports = {
   getAllUsers,
   getUserById,
   addUser,
   modifyUser,
-  deleteUser
+  deleteUser,
 };
