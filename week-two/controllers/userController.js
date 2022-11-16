@@ -40,8 +40,8 @@ const addUser = async (req, res) => {
 
 const modifyUser = async (req, res) => {
   const editUser = req.body;
-  const userId = req.params.catId;
-  console.log("Edit cat info: ", editCat);
+  const userId = req.params.userId;
+  console.log("Edit user info: ", editUser);
   const result = await userModel.editUserById(userId, editUser, res);
   if (result.affectedRows > 0) {
     console.log("user with ID info change: ", userId);
