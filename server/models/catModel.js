@@ -46,13 +46,13 @@ const addCat = async (cat, res) => {
   }
 };
 
-const deleteCatById = async (catId, res) => {
+const deleteCatById = async (catId, owner, res) => {
   try {
-    const row = await promisePool.query(
-      "DELETE FROM wop_cat WHERE cat_id = ?",
-      [catId]
+    const [rows] = await promisePool.query(
+      "DELETE FROM wop_cat WHERE cat_id = ? AND owner = ?",
+      [catId, owner]
     );
-    return row[0];
+    return rows;
   } catch (e) {
     console.log("error", e.message);
     res.status[500].send(e.message);
