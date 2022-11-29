@@ -1,6 +1,7 @@
 'use strict';
-const url = 'http://localhost:3000'; // change url when uploading to server
-
+import { config } from 'process';
+//const url = 'http://localhost:3000'; // change url when uploading to server
+import { url } from '../../config.js';
 // select existing html elements
 const addForm = document.querySelector('#addCatForm');
 const userList = document.querySelector('.add-owner');

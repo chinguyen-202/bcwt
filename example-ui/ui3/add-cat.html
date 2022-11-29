@@ -20,13 +20,7 @@
       <div class="forms">
         <div class="form-wrapper">
           <h3>Add cat</h3>
-          <form
-            action="http://localhost:3000/cat"
-            method="post"
-            class="light-border"
-            enctype="multipart/form-data"
-            id="addCatForm"
-          >
+          <form class="light-border" id="addCatForm">
             <input
               class="light-border"
               type="text"
@@ -58,8 +52,8 @@
         </div>
       </div>
     </div>
-    <script src="./js/check-login.js"></script>
+    <script type="module" src="./js/check-login.js"></script>
     <script src="./js/serialize.js"></script>
-    <script src="./js/add-cat.js"></script>
+    <script type="module" src="./js/add-cat.js"></script>
   </body>
 </html>
