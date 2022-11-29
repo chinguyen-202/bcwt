@@ -47,7 +47,10 @@ const deleteCat = async (req, res) => {
 
   if (result.affectedRows > 0) {
     console.log("delete cat: ", result);
-    res.status(200).json({ message: "cat deleted" });
+    //TODO: check what happen when sql query is not working
+    if (result.affectedRows > 0) {
+      res.status(200).json({ message: "cat deleted" });
+    }
   } else {
     res.status(401).json({ message: "Cat delete failed" });
   }
