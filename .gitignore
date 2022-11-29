@@ -1,6 +1,8 @@
 .DS_Store
 node_modules/
 server/uploads/*
-
 !server/uploads/.gitkeep
 server/.env
+.env
+server/thumbnails/*
+!server/thumbnails/.gitkeep
