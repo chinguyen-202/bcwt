@@ -1,6 +1,6 @@
 'use strict';
-const url = 'http://localhost:3000'; // change url when uploading to server
-
+//const url = 'http://localhost:3000'; // change url when uploading to server
+const url = 'http://chinguyen.northeurope.cloudapp.azure.com';
 // select existing html elements
 const loginForm = document.querySelector('#login-form');
 const addUserForm = document.querySelector('#add-user-form');
