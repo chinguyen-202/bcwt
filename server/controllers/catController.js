@@ -2,7 +2,7 @@
 // catController
 const catModel = require('../models/catModel');
 const { validationResult } = require('express-validator');
-const { makeThumbnail } = require('../utils/image.js');
+const { makeThumbnail, getCoordinates } = require('../utils/image.js');
 
 const cats = catModel.cats;
 
@@ -32,8 +32,10 @@ const createCat = async (req, res) => {
   if (!req.file) {
     res.status(404).json({ message: 'file missing or invalid' });
   } else if (errors.isEmpty()) {
-    await makeThumbnail(req.file.path, req.file.filename);
     const cat = req.body;
+    await makeThumbnail(req.file.path, req.file.filename);
+    cat.coords = JSON.stringify(await getCoordinates(req.file.path));
+
     cat.owner = req.user.user_id;
     cat.filename = req.file.filename;
     console.log('creating a new cat:', cat);
